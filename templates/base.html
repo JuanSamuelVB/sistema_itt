@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <title>
+	    {% block title %}
+	    {%endblock%}
+    </title>
+
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+
+<body >
+	<a href="/">Home</a>
+	<a href="/login">Login</a>
+	<a href="/logout">Salir</a>
+	{%block content%}
+	{%endblock%}
+
+	{%block javascripts%}
+	{%endblock%}
+</body>
+</html>
