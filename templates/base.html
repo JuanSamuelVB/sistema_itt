@@ -6,15 +6,36 @@
 	    {% block title %}
 	    {%endblock%}
     </title>
-
+     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'estilogin.css' %}">
     {% block stylesheets %}
     {% endblock %}
 </head>
 
 <body >
-	<a href="/">Home</a>
-	<a href="/login">Login</a>
-	<a href="/logout">Salir</a>
+	<div class="encabezado row">
+	   <div class="col-lg-2"></div>
+	   <div class="col-lg-2">
+	     <img  class="logo" src="http://tectijuana.edu.mx/wp-content/themes/fuente-tnm/images/header-sep.png"></div>
+	  <div class="int-text col-lg-4">
+	  <h3>TECNOLOGICO NACIONAL DE MEXICO</h3>
+	  <h4>INSTITUTO TECNOLOGICO DE TIJUANA</h4></div>
+	    <div class="col-lg-2">
+	      <img style="width:40%" src="http://tectijuana.edu.mx/wp-content/plugins/website-logo/images/logo_ITT1.png" alt="" />
+	    </div>
+	</div>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	     
+	    </div>
+	    <ul class="nav navbar-nav">
+		    <li><a href="/">Home</a></li>
+			<li><a href="/login">Login</a></li>
+			<li><a href="/logout">Salir</a></li>
+	    </ul>
+	  </div>
+	</nav>
 	{%block content%}
 	{%endblock%}
 
