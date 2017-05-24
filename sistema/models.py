@@ -21,8 +21,14 @@ class Alumno(models.Model):
     carrera = models.CharField(max_length=50)
     semestre = models.IntegerField(choices=SEMESTRES, default=1)
 
+    def __unicode__(self):
+        return self.apellidos
+
 class Profesor(models.Model):
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     profesion = models.CharField(max_length=50)
     rol = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.apellidos

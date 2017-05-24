@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Actividades{% endblock %}
+{% block content %}
+<div  class="modal-dialog log">
+<h1>Actividades</h1>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Actividad</th>
+        <th>Descripcion</th>
+        <th>Total Creditos </th>
+        <th>Estatus</th>
+        <th>Profesor</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for act in object_list%}
+      <tr>
+        <td>{{act.nombre}}</td>
+        <td>{{act.descripcion}}</td>
+        <td>{{act.total_creditos}}</td>
+        <td> {{act.estatus}}</td>
+        <td>{{act.profesor}}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

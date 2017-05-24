@@ -8,8 +8,6 @@
     </title>
      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
      <link rel="stylesheet" type="text/css" href="{% static 'estilogin.css' %}">
-    {% block stylesheets %}
-    {% endblock %}
 </head>
 
 <body >
@@ -31,13 +29,23 @@
 	    </div>
 	    <ul class="nav navbar-nav">
 		    <li><a href="/">Home</a></li>
+		     <li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actividad complementaria <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="/creditos/nueva-actividad">Crear Actividad</a></li>
+	            <li><a href="/">Ver Actividades</a></li>
+	          </ul>
+	        </li>
 			<li><a href="/login">Login</a></li>
 			<li><a href="/logout">Salir</a></li>
 	    </ul>
 	  </div>
 	</nav>
+	<div class="starter-template">
 	{%block content%}
 	{%endblock%}
+	</div>
+
 
 	{%block javascripts%}
 	{%endblock%}

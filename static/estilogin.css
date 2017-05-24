@@ -1,5 +1,9 @@
 body{
-  100%
+
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
 }
 .log{
   margin:0 auto;
@@ -24,8 +28,8 @@ color: #616161;
   float:left;
 }
 .encabezado{
-  width:100%; 
-  border-bottom:4px solid #fafafa;
+  /*width:100%; 
+  border-bottom:4px solid #fafafa;*/
   background:white;
 }
 body{

@@ -14,3 +14,7 @@ class Actividad(models.Model):
     profesor = models.ForeignKey('sistema.Profesor', 
                                  on_delete=models.CASCADE)
     alumnos = models.ManyToManyField('sistema.Alumno')
+
+    def __unicode__(self):
+        return self.nombre
+        
