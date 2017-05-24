@@ -1,18 +1,18 @@
 from django.db import models
 
 SEMESTRES = (
-        (1, '1° semestre'),
-        (2, '2° semestre'),
-        (3, '3° semestre'),
-        (4, '4° semestre'),
-        (5, '5° semestre'),
-        (6, '6° semestre'),
-        (7, '7° semestre'),
-        (8, '8° semestre'),
-        (9, '9° semestre'),
-        (10, '10° semestre'),
-        (11, '11° semestre'),
-        (12, '12° semestre'),
+        (1, '1 semestre'),
+        (2, '2 semestre'),
+        (3, '3 semestre'),
+        (4, '4 semestre'),
+        (5, '5 semestre'),
+        (6, '6 semestre'),
+        (7, '7 semestre'),
+        (8, '8 semestre'),
+        (9, '9 semestre'),
+        (10, '10 semestre'),
+        (11, '11 semestre'),
+        (12, '12 semestre'),
     )
 
 class Alumno(models.Model):
