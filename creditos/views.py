@@ -18,7 +18,7 @@ class reporteActividad(ListView):
 def solicitar(request, pk):
     actividad = get_object_or_404(Actividad, pk=pk)
 
-    if not request.user.alumno in actividad.alumnos.all():
-        actividad.alumnos.add(request.user.alumno)
+    if not request.user.alumno in actividad.candidatos.all():
+        actividad.candidatos.add(request.user.alumno)
 
     return redirect('creditos:reporte_actividad')

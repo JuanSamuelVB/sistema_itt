@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Actividades{% endblock %}
 {% block content %}
-<div  class="modal-dialog log">
+<div  class="container log">
 <h1>Actividades</h1>
 <table class="table table-bordered">
     <thead>
@@ -9,27 +9,59 @@
         <th>Actividad</th>
         <th>Descripcion</th>
         <th>Total Creditos </th>
+{% if user.profesor %}
         <th>Estatus</th>
+{% endif %}
         <th>Profesor</th>
+{% if user.profesor %}
+        <th>Candidatos</th>
+        <th>Alumnos</th>
+{% endif %}
       </tr>
     </thead>
     <tbody>
-{% for act in object_list%}
-      <tr>
-        <td>{{act.nombre}}</td>
-        <td>{{act.descripcion}}</td>
-        <td>{{act.total_creditos}}</td>
-        <td> {{act.estatus}}</td>
-        <td>{{act.profesor}}</td>
 {% if user.alumno %}
-  {% if user.alumno in act.alumnos.all %}
+  {% for act in object_list%}
+  {% if not user.alumno in act.alumnos.all %}
+      <tr>
+        <td>{{ act.nombre }}</td>
+        <td>{{ act.descripcion }}</td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.profesor }}</td>
+    {% if user.alumno in act.candidatos.all %}
         <td>Solicitada</td>
-  {% else %}
+    {% else %}
         <td><a href="{% url 'creditos:solicitar' act.pk %}">Solicitar</a></td>
-  {% endif %}
-{% endif %}
+    {% endif %}
       </tr>
-{% endfor %}
+  {% endif %}
+  {% endfor %}
+
+{% elif user.profesor %}
+  {% for act in object_list%}
+      <tr>
+        <td>{{ act.nombre }}</td>
+        <td>{{ act.descripcion }}</td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.get_estatus_display }}</td>
+        <td>{{ act.profesor }}</td>
+        <td>{{ act.candidatos.count }}</td>
+        <td>{{ act.alumnos.count }}</td>
+      </tr>
+  {% endfor %}
+
+{% else %}
+  {% for act in object_list %}
+  {% if act.estatus == 2 %}
+      <tr>
+        <td>{{ act.nombre }}</td>
+        <td>{{ act.descripcion }}</td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.profesor }}</td>
+      </tr>
+  {% endif %}
+  {% endfor %}
+{% endif %}
   </tbody>
 </table>
 </div>

@@ -13,10 +13,14 @@ class Actividad(models.Model):
     descripcion = models.TextField()
     total_creditos = models.IntegerField()
     estatus = models.IntegerField(choices=ESTATUS, default=1)
-    profesor = models.ForeignKey('sistema.Profesor', 
+    profesor = models.ForeignKey('sistema.Profesor',
                                  on_delete=models.CASCADE)
-    alumnos = models.ManyToManyField('sistema.Alumno')
+    candidatos = models.ManyToManyField('sistema.Alumno',
+            blank=True,
+            related_name='actividades_solicitada')
+    alumnos = models.ManyToManyField('sistema.Alumno',
+            blank=True,
+            related_name='actividades')
 
     def __str__(self):
         return self.nombre
-        
