@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
 SEMESTRES = (
@@ -18,6 +19,7 @@ SEMESTRES = (
 
 @python_2_unicode_compatible
 class Alumno(models.Model):
+    user = models.OneToOneField(User, related_name='alumno')
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     carrera = models.CharField(max_length=50)
@@ -28,6 +30,7 @@ class Alumno(models.Model):
 
 @python_2_unicode_compatible
 class Profesor(models.Model):
+    user = models.OneToOneField(User, related_name='profesor')
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     profesion = models.CharField(max_length=50)
