@@ -14,15 +14,22 @@
       </tr>
     </thead>
     <tbody>
-    {% for act in object_list%}
+{% for act in object_list%}
       <tr>
         <td>{{act.nombre}}</td>
         <td>{{act.descripcion}}</td>
         <td>{{act.total_creditos}}</td>
         <td> {{act.estatus}}</td>
         <td>{{act.profesor}}</td>
+{% if user.alumno %}
+  {% if user.alumno in act.alumnos.all %}
+        <td>Solicitada</td>
+  {% else %}
+        <td><a href="{% url 'creditos:solicitar' act.pk %}">Solicitar</a></td>
+  {% endif %}
+{% endif %}
       </tr>
-  {% endfor %}
+{% endfor %}
   </tbody>
 </table>
 </div>
