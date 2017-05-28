@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 SEMESTRES = (
         (1, '1 semestre'),
@@ -15,20 +16,22 @@ SEMESTRES = (
         (12, '12 semestre'),
     )
 
+@python_2_unicode_compatible
 class Alumno(models.Model):
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     carrera = models.CharField(max_length=50)
     semestre = models.IntegerField(choices=SEMESTRES, default=1)
 
-    def __unicode__(self):
-        return self.apellidos
+    def __str__(self):
+        return self.apellidos + " " + self.nombre
 
+@python_2_unicode_compatible
 class Profesor(models.Model):
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     profesion = models.CharField(max_length=50)
     rol = models.CharField(max_length=50)
 
-    def __unicode__(self):
-        return self.apellidos
+    def __str__(self):
+        return self.apellidos + " " + self.nombre

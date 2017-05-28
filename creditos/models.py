@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 ESTATUS = (
         (1, 'Por aprobar'),
@@ -6,6 +7,7 @@ ESTATUS = (
         (3, 'Terminada'),
     )
 
+@python_2_unicode_compatible
 class Actividad(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
@@ -15,6 +17,6 @@ class Actividad(models.Model):
                                  on_delete=models.CASCADE)
     alumnos = models.ManyToManyField('sistema.Alumno')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nombre
         
