@@ -17,7 +17,7 @@ class Actividad(models.Model):
                                  on_delete=models.CASCADE)
     candidatos = models.ManyToManyField('sistema.Alumno',
             blank=True,
-            related_name='actividades_solicitada')
+            related_name='actividades_solicitadas')
     alumnos = models.ManyToManyField('sistema.Alumno',
             blank=True,
             related_name='actividades')
