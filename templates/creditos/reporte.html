@@ -21,13 +21,15 @@
     <tbody>
 {% if user.alumno %}
   {% for act in object_list%}
-  {% if not user.alumno in act.alumnos.all %}
+  {% if not user.alumno in act.alumnos.all and act.estatus == 2 or act.estatus == 3 %}
       <tr>
         <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
         <td>{{ act.total_creditos }}</td>
         <td>{{ act.profesor }}</td>
     {% if user.alumno in act.candidatos.all %}
         <td>Solicitada</td>
+    {% elif act.estatus == 3 %}
+        <td>Terminada</td>
     {% else %}
         <td><a href="{% url 'creditos:solicitar' act.pk %}">Solicitar</a></td>
     {% endif %}
