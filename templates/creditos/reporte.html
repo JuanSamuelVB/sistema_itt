@@ -7,7 +7,6 @@
     <thead>
       <tr>
         <th>Actividad</th>
-        <th>Descripcion</th>
         <th>Total Creditos </th>
 {% if user.profesor %}
         <th>Estatus</th>
@@ -24,8 +23,7 @@
   {% for act in object_list%}
   {% if not user.alumno in act.alumnos.all %}
       <tr>
-        <td>{{ act.nombre }}</td>
-        <td>{{ act.descripcion }}</td>
+        <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
         <td>{{ act.total_creditos }}</td>
         <td>{{ act.profesor }}</td>
     {% if user.alumno in act.candidatos.all %}
@@ -40,8 +38,7 @@
 {% elif user.profesor %}
   {% for act in object_list%}
       <tr>
-        <td>{{ act.nombre }}</td>
-        <td>{{ act.descripcion }}</td>
+        <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
         <td>{{ act.total_creditos }}</td>
         <td>{{ act.get_estatus_display }}</td>
         <td>{{ act.profesor }}</td>
@@ -55,7 +52,6 @@
   {% if act.estatus == 2 %}
       <tr>
         <td>{{ act.nombre }}</td>
-        <td>{{ act.descripcion }}</td>
         <td>{{ act.total_creditos }}</td>
         <td>{{ act.profesor }}</td>
       </tr>

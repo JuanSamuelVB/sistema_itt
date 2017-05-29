@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView,CreateView, ListView
+from django.views.generic import TemplateView,CreateView, ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
-from .models import *
+from .models import Actividad
 
 class newActividad(CreateView):
     template_name = 'creditos/nueva-actividad.html'
@@ -13,6 +13,10 @@ class reporteActividad(ListView):
     template_name='creditos/reporte.html'
     model = Actividad
     fields='__all__'
+
+class detalleActividad(DetailView):
+    template_name = 'creditos/actividad.html'
+    model = Actividad
 
 
 def solicitar(request, pk):

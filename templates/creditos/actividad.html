@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ object }}
+{% endblock %}
+
+{% block content %}
+<div  class="container log text-left">
+
+{% if user.is_authenticated %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>{{ object }}</h1>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-12">
+  <div>
+    <b>Profesor: </b> {{ object.profesor }} <br />
+    <b>Créditos: </b> {{ object.total_creditos }} <br />
+    <b>Estado: </b> {{ object.get_estatus_display }} <br />
+    <b>Descripción: </b> {{ object.descripcion }} <br />
+  </div>
+  </div>
+  </div>
+
+  <div class="row">
+
+{% if user.alumno in actividad.alumnos.all or user.profesor %}
+    <div class="col-sm-12">
+      <h2>Alumnos</h2>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Aceptados</h2>
+        </div>
+
+        {% if object.alumnos.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Semestre</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for alumno in object.alumnos.all %}
+            <tr>
+              <td>{{ alumno }}</td>
+              <td>{{ alumno.carrera }}</td>
+              <td>{{ alumno.semestre }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="panel-body text-center">
+          No hay alumnos aceptados para esta actividad. <br>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+{% endif %}
+
+{% if user.profesor %}
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Solicitudes</h2>
+        </div>
+
+        {% if object.candidatos.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Semestre</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for alumno in object.candidatos.all %}
+            <tr>
+              <td>{{ alumno }}</td>
+              <td>{{ alumno.carrera }}</td>
+              <td>{{ alumno.semestre }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="panel-body text-center">
+          No hay solicitudes de alumnos para realizar esta actividad. <br>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+{% endif %}
+
+  </div>
+
+{% else %}
+  <div class="row">
+    <div class="col-sm-12">Acceso no autorizado.</div>
+  </div>
+{% endif %}
+
+</div>
+{% endblock %}
