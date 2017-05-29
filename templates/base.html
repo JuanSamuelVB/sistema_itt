@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'creditos:reporte_actividad' %}">Ver Actividades</a></li>
 {% if user.profesor %}
-  {% if user.profesor.rol == 'admin' %}
+  {% if user.profesor.creditos_admin %}
             <li><a href="{% url 'creditos:por_aprobar'%}">Actividades por aprobar</a></li>
   {% endif %}
             <li><a href="{% url 'creditos:newActividad' %}">Crear Actividad</a></li>
