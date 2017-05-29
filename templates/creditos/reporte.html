@@ -21,7 +21,7 @@
     <tbody>
 {% if user.alumno %}
   {% for act in object_list%}
-  {% if not user.alumno in act.alumnos.all and act.estatus == 2 or act.estatus == 3 %}
+  {% if not user.alumno in act.alumnos.all and act.visible %}
       <tr>
         <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
         <td>{{ act.total_creditos }}</td>
@@ -39,6 +39,7 @@
 
 {% elif user.profesor %}
   {% for act in object_list%}
+  {% if act.visible %}
       <tr>
         <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
         <td>{{ act.total_creditos }}</td>
@@ -47,11 +48,12 @@
         <td>{{ act.candidatos.count }}</td>
         <td>{{ act.alumnos.count }}</td>
       </tr>
+  {% endif %}
   {% endfor %}
 
 {% else %}
   {% for act in object_list %}
-  {% if act.estatus == 2 %}
+  {% if act.visible %}
       <tr>
         <td>{{ act.nombre }}</td>
         <td>{{ act.total_creditos }}</td>
@@ -62,5 +64,10 @@
 {% endif %}
   </tbody>
 </table>
+
+  {% if user.profesor.rol == 'admin' %}
+  <a href="{% url 'creditos:por_aprobar' %}">Ver actividades por aprobar.</a>
+  {% endif %}
+
 </div>
 {% endblock %}

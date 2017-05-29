@@ -24,3 +24,6 @@ class Actividad(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def visible(self):
+        return self.estatus == 2 or self.estatus == 3

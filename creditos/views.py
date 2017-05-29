@@ -14,6 +14,10 @@ class reporteActividad(ListView):
     model = Actividad
     fields='__all__'
 
+class porAprobarActividad(ListView):
+    template_name='creditos/por_aprobar.html'
+    queryset = Actividad.objects.filter(estatus=1)
+
 class detalleActividad(DetailView):
     template_name = 'creditos/actividad.html'
     model = Actividad
@@ -26,3 +30,16 @@ def solicitar(request, pk):
         actividad.candidatos.add(request.user.alumno)
 
     return redirect('creditos:reporte_actividad')
+
+def aprobar(request, pk):
+    actividad = get_object_or_404(Actividad, pk=pk)
+    actividad.estatus = 2
+    actividad.save()
+
+    return redirect('creditos:reporte_actividad')
+
+def eliminar(request, pk):
+    actividad = get_object_or_404(Actividad, pk=pk)
+    actividad.delete()
+
+    return redirect('creditos:por_aprobar')

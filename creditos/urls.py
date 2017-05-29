@@ -6,5 +6,8 @@ urlpatterns = [
     url(r'^nueva-actividad/$',newActividad.as_view(),name='newActividad'),
     url(r'^solicitar/(?P<pk>\d+)/$', solicitar, name='solicitar'),
     url(r'^reporte/$',reporteActividad.as_view(),name="reporte_actividad"),
+    url(r'^reporte/por-aprobar$', porAprobarActividad.as_view(), name="por_aprobar"),
+    url(r'^aprobar/(?P<pk>\d+)/$', aprobar, name='aprobar'),
+    url(r'^eliminar/(?P<pk>\d+)/$', eliminar, name='eliminar'),
     url(r'^actividad/(?P<pk>\d+)/$', detalleActividad.as_view(), name="actividad"),
 ]
