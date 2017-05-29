@@ -151,11 +151,17 @@
           </tbody>
         </table>
 
+        <div class="panel-body text-center">
+          <a href="{% url 'creditos:newActividad' %}">
+            Crear nueva actividad.
+          </a>
+        </div>
+
         {% else %}
         <div class="panel-body text-center">
           No tienes actividades. <br>
-          <a href="{% url 'creditos:reporte_actividad' %}">
-            Ver actividades disponibles.
+          <a href="{% url 'creditos:newActividad' %}">
+            Crear nueva actividad.
           </a>
         </div>
         {% endif %}

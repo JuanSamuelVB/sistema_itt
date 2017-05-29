@@ -6,8 +6,13 @@ from .models import Actividad
 class newActividad(CreateView):
     template_name = 'creditos/nueva-actividad.html'
     model = Actividad
-    fields = '__all__'
-    success_url = reverse_lazy('Welcome_View')
+    fields = ['nombre', 'total_creditos', 'descripcion']
+    success_url = reverse_lazy('sistema:profile')
+
+    def form_valid(self, form):
+        act = form.save(commit=False)
+        act.profesor = self.request.user.profesor
+        return super(newActividad, self).form_valid(form)
 
 class reporteActividad(ListView):
     template_name='creditos/reporte.html'
