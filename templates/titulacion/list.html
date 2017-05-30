@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Titulaciones{% endblock %}
+{% block content %}
+<div  class="container log">
+
+{% if user.profesor %}
+<h1>Titulaciones</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Proyecto</th>
+        <th>Alumno</th>
+        <th>Presidente</th>
+        <th>Secretario</th>
+        <th>Vocal</th>
+        <th>Suplente</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha Fin</th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {% for titu in object_list%}
+      <tr>
+        <td>{{ titu.proyecto }}</a></td>
+        <td>{{ titu.alumno }}</td>
+        <td>{{ titu.presidente }}</td>
+        <td>{{ titu.secretario }}</td>
+        <td>{{ titu.vocal }}</td>
+        <td>{{ titu.suplente }}</td>
+        <td>{{ titu.fecha_inicio }}</td>
+        <td>{{ titu.fecha_fin }}</td>
+        <td><a href="{% url 'titulacion:eliminar' titu.pk %}">Eliminar</a></td>
+      </tr>
+  {% endfor %}
+
+{% else %}
+  <div class="row">
+    <div class="col-sm-12">Acceso no autorizado.</div>
+  </div>
+{% endif %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

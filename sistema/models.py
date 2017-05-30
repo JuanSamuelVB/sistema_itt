@@ -17,13 +17,6 @@ SEMESTRES = (
         (12, '12 semestre'),
     )
 
-ROLES = (
-    (1, 'Presidente'),
-    (2, 'Secretario'),
-    (3, 'Vocal'),
-    (4, 'Suplente'),
-)
-
 @python_2_unicode_compatible
 class Alumno(models.Model):
     user = models.OneToOneField(User, related_name='alumno')
@@ -41,7 +34,6 @@ class Profesor(models.Model):
     apellidos = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     profesion = models.CharField(max_length=50)
-    rol = models.IntegerField(choices=ROLES, default=1)
     creditos_admin = models.BooleanField(default=False)
 
     def __str__(self):

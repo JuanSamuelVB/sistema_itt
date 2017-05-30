@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^',include('sistema.urls')),
     url(r'^creditos/', include('creditos.urls')),
     url(r'^ingreso/', include('ingreso.urls')),
+    url(r'^titulacion/', include('titulacion.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
