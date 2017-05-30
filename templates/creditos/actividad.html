@@ -89,6 +89,7 @@
               <td>{{ alumno }}</td>
               <td>{{ alumno.carrera }}</td>
               <td>{{ alumno.semestre }}</td>
+              <td><a href="{% url 'creditos:aceptar_alumno' object.pk alumno.pk %}">Aceptar</a></td>
             </tr>
             {% endfor %}
           </tbody>

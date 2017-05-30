@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Visitante{% endblock %}
+{% block content %}
+<h1>Visitante</h1>
+
+<div  class="container log">
+  <form method='POST'>
+  {% csrf_token %}
+  <p>Nombre :  <input type="text" name="Nombre" placeholder="Nombre"></p>
+  <p>Apellido Paterno :  <input type="text" name="ApellidoP" placeholder="Apellido Paterno"></p>
+  <p>Apellido Materno :  <input type="text" name="ApellidoM" placeholder="Apellido MAterno"></p>
+
+  <p>Descripcion:</p>
+  <p><Textarea type="Textarea" name="descricion" placeholder = "Detalles" cols="50" rows="5" ></Textarea></p>
+  <p> </p>
+  <input type="Submit" name="ingresar" value="Aceptar">
+  <input type='hidden' name='action' value='visit'>
+  </form>
+
+  <form method="POST">
+  {% csrf_token %}
+  <p>Estudiante: <input type="Submit" name="estudiante" value="Estudiante"></p>
+  <input type='hidden' name='action' value='est'>
+  </form>
+</div>
+{% endblock %}

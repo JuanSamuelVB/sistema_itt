@@ -42,6 +42,7 @@ class Profesor(models.Model):
     nombre = models.CharField(max_length=50)
     profesion = models.CharField(max_length=50)
     rol = models.IntegerField(choices=ROLES, default=1)
+    creditos_admin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.apellidos + " " + self.nombre

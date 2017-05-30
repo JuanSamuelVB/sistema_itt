@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView,CreateView, ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
+
 from .models import Actividad
+from sistema.models import Alumno
 
 class newActividad(CreateView):
     template_name = 'creditos/nueva-actividad.html'
@@ -48,3 +50,13 @@ def eliminar(request, pk):
     actividad.delete()
 
     return redirect('creditos:por_aprobar')
+
+def aceptar_alumno(request, actividad_pk, alumno_pk):
+    alumno = get_object_or_404(Alumno, pk=alumno_pk)
+    actividad = get_object_or_404(Actividad, pk=actividad_pk)
+
+    if alumno in actividad.candidatos.all():
+        actividad.candidatos.remove(alumno)
+        actividad.alumnos.add(alumno)
+
+    return redirect('creditos:actividad', pk=actividad.pk)

@@ -65,7 +65,7 @@
   </tbody>
 </table>
 
-  {% if user.profesor.rol == 'admin' %}
+  {% if user.profesor.creditos_admin %}
   <a href="{% url 'creditos:por_aprobar' %}">Ver actividades por aprobar.</a>
   {% endif %}
 

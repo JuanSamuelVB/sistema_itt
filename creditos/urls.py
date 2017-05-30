@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^aprobar/(?P<pk>\d+)/$', aprobar, name='aprobar'),
     url(r'^eliminar/(?P<pk>\d+)/$', eliminar, name='eliminar'),
     url(r'^actividad/(?P<pk>\d+)/$', detalleActividad.as_view(), name="actividad"),
+    url(r'^actividad/(?P<actividad_pk>\d+)/aceptar-alumno/(?P<alumno_pk>\d+)/$', aceptar_alumno, name="aceptar_alumno"),
 ]
