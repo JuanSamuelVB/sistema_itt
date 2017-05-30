@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Editar Titulacion{% endblock %}
+{% block content %}
+<div class="container" align="left">
+<div  class="modal-dialog log">
+<h1 align="center">Editar</h1>
+	<form method="POST">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="edit" class="save btn btn-default">Actualizar</button>
+		<button type="reset" class="cancel btn btn-default">Cancelar</button>
+	</form>
+</div>
+</div>
+{% endblock %}

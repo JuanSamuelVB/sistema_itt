@@ -30,6 +30,7 @@
         <td>{{ titu.suplente }}</td>
         <td>{{ titu.fecha_inicio }}</td>
         <td>{{ titu.fecha_fin }}</td>
+        <td><a href="{% url 'titulacion:editar' titu.pk %}">Editar</a></td>
         <td><a href="{% url 'titulacion:eliminar' titu.pk %}">Eliminar</a></td>
       </tr>
   {% endfor %}

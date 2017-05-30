@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView,CreateView, ListView, DetailView
+from django.views.generic import TemplateView,CreateView, ListView, DetailView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 
 from sistema.models import Alumno, Profesor
 from .models import Titulacion
+from .forms import TitulacionForm
 
 class newTitulacion(CreateView):
     template_name = 'titulacion/nuevo-titulacion.html'
+    '''form_class = TitulacionForm'''
     model = Titulacion
-    fields = ['proyecto', 'alumno', 'presidente', 'secretario', 'vocal', 'suplente', 'fecha_inicio', 'fecha_fin']
+    fields = '__all__'
     success_url = reverse_lazy('sistema:profile')
 
     def form_valid(self, form):
@@ -21,6 +23,17 @@ class listaTitulacion(ListView):
     model = Titulacion
     fields='__all__'
     queryset = Titulacion.objects.all()
+
+class editaTitulacion(UpdateView):
+    model = Titulacion
+    fields='__all__'
+    template_name='titulacion/edit.html'
+
+def editar(request, pk):
+    titusE = get_object_or_404(Titulacion, pk=pk)
+    titusE.delete()
+
+    return redirect('titulacion:editar')
 
 def eliminar(request, pk):
     titus = get_object_or_404(Titulacion, pk=pk)
