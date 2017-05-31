@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Actividades{% endblock %}
+{% block content %}
+<div  class="container log">
+
+{% if user.profesor.creditos_admin %}
+<h1>Actividades por aprobar</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Actividad</th>
+        <th>Profesor</th>
+        <th>Total créditos</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {% for act in object_list%}
+      <tr>
+        <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
+        <td>{{ act.profesor }}</td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.get_estatus_display }}</td>
+        <td><a href="{% url 'creditos:aprobar' act.pk %}">Aprobar</a></td>
+        <td><a href="{% url 'creditos:eliminar' act.pk %}">Eliminar</a></td>
+      </tr>
+  {% endfor %}
+
+{% else %}
+  <div class="row">
+    <div class="col-sm-12">Acceso no autorizado.</div>
+  </div>
+{% endif %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

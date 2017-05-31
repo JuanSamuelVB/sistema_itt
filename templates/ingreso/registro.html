@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Registro de alumno{% endblock %}
+{% block content %}
+<h1>Registro de alumno</h1>
+
+<div  class="container log">
+  <form method='POST'>
+  {% csrf_token %}
+  <p>Numero de Control :  <input type="text" name="cont" placeholder="Num. de control"></p>
+  <p>Nombre :  <input type="text" name="nomb" placeholder="Nombre"></p>
+  <p>Apellido Paterno :  <input type="text" name="pat" placeholder="Apellido Paterno"></p>
+  <p>Apellido Materno :  <input type="text" name="mat" placeholder="Apellido Materno"></p>
+  <input type="Submit" name="ok" value="Registrar">
+  <input type="hidden" name="action" value="regist">
+  </form>
+</div>
+{% endblock %}
