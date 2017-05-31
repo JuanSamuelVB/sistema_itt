@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Actividades{% endblock %}
+{% block content %}
+<div  class="container log">
+<h1>Actividades</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Actividad</th>
+        <th>Total Creditos </th>
+{% if user.profesor %}
+        <th>Estatus</th>
+{% endif %}
+        <th>Profesor</th>
+{% if user.profesor %}
+        <th>Candidatos</th>
+        <th>Alumnos</th>
+{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+{% if user.alumno %}
+  {% for act in object_list%}
+  {% if not user.alumno in act.alumnos.all and act.visible %}
+      <tr>
+        <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.profesor }}</td>
+    {% if user.alumno in act.candidatos.all %}
+        <td>Solicitada</td>
+    {% elif act.estatus == 3 %}
+        <td>Terminada</td>
+    {% else %}
+        <td><a href="{% url 'creditos:solicitar' act.pk %}">Solicitar</a></td>
+    {% endif %}
+      </tr>
+  {% endif %}
+  {% endfor %}
+
+{% elif user.profesor %}
+  {% for act in object_list%}
+  {% if act.visible %}
+      <tr>
+        <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act.nombre }}</a></td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.get_estatus_display }}</td>
+        <td>{{ act.profesor }}</td>
+        <td>{{ act.candidatos.count }}</td>
+        <td>{{ act.alumnos.count }}</td>
+      </tr>
+  {% endif %}
+  {% endfor %}
+
+{% else %}
+  {% for act in object_list %}
+  {% if act.visible %}
+      <tr>
+        <td>{{ act.nombre }}</td>
+        <td>{{ act.total_creditos }}</td>
+        <td>{{ act.profesor }}</td>
+      </tr>
+  {% endif %}
+  {% endfor %}
+{% endif %}
+  </tbody>
+</table>
+
+  {% if user.profesor.creditos_admin %}
+  <a href="{% url 'creditos:por_aprobar' %}">Ver actividades por aprobar.</a>
+  {% endif %}
+
+</div>
+{% endblock %}

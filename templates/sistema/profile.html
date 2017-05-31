@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if user.alumno %}
+  {{ user.alumno }}
+{% elif user.profesor %}
+  {{user.profesor }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div  class="container log text-left">
+
+  {% if user.is_authenticated %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>
+{% if user.alumno %}
+  {{ user.alumno }}
+{% elif user.profesor %}
+  {{user.profesor }}
+{% endif %}
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-12">
+  <div>
+    {% if user.alumno %}
+    <b>Carrera: </b> {{ user.alumno.carrera }} <br />
+    <b>Semestre: </b> {{ user.alumno.semestre }}° <br />
+    {% elif user.profesor %}
+    <b>Profesión: </b> {{ user.profesor.profesion }} <br />
+    {% endif %}
+  </div>
+  </div>
+  </div>
+
+  <!-- Actividades complementarias -->
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Créditos</h2>
+    </div>
+
+{% if user.alumno %}
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Actividades</h2>
+        </div>
+
+        {% if user.alumno.actividades.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Créditos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for act in user.alumno.actividades.all %}
+            <tr>
+              <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act }}</a></td>
+              <td>{{ act.total_creditos }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="panel-body text-center">
+          No tienes actividades. <br>
+          <a href="{% url 'creditos:reporte_actividad' %}">
+            Ver actividades disponibles.
+          </a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Actividades solicitadas</h2>
+        </div>
+
+        {% if user.alumno.actividades_solicitadas.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Créditos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for act in user.alumno.actividades_solicitadas.all %}
+            <tr>
+              <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act }}</a></td>
+              <td>{{ act.total_creditos }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="panel-body text-center">
+          <a href="{% url 'creditos:reporte_actividad' %}">
+            Ver actividades disponibles.
+          </a>
+        </div>
+
+        {% else %}
+        <div class="panel-body text-center">
+          No has solicitado actividades. <br>
+          <a href="{% url 'creditos:reporte_actividad' %}">
+            Ver actividades disponibles.
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+{% elif user.profesor %}
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Actividades</h2>
+        </div>
+
+        {% if user.profesor.actividad_set.all %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Créditos</th>
+              <th>Estado</th>
+              <th>Candidatos</th>
+              <th>Alumnos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for act in user.profesor.actividad_set.all %}
+            <tr>
+              <td><a href="{% url 'creditos:actividad' act.pk %}">{{ act }}</a></td>
+              <td>{{ act.total_creditos }}</td>
+              <td>{{ act.get_estatus_display }}</td>
+              <td>{{ act.candidatos.count }}</td>
+              <td>{{ act.alumnos.count }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="panel-body text-center">
+          <a href="{% url 'creditos:newActividad' %}">
+            Crear nueva actividad.
+          </a>
+        </div>
+
+        {% else %}
+        <div class="panel-body text-center">
+          No tienes actividades. <br>
+          <a href="{% url 'creditos:newActividad' %}">
+            Crear nueva actividad.
+          </a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+{% endif %}
+
+  </div>
+
+  <!--
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Titulación</h2>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Titulación</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+
+  {% else %}
+  <div class="row">
+    <div class="col-sm-12">Acceso no autorizado.</div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

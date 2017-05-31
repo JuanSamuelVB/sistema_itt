@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Sistema de ingreso{% endblock %}
+{% block content %}
+<h1>Sistema de ingreso</h1>
+
+<div  class="container log">
+  <form method='POST'>
+  {% csrf_token %}
+  <p>Numero de Control :  <input type="text" name="control" placeholder="Num. de control"></p>
+
+
+  <p> </p>
+  <input type="Submit" name="ingresar" value="Ingresar">
+  <input type='hidden' name='action' value='numcontrol'>
+  </form>
+
+  <form method='POST'>
+  {% csrf_token %}
+  <p>Visitante: <input type="Submit" name="visitante" value="Visitante"></p>
+  <input type='hidden' name='action' value='visitante'>
+  </form>
+</div>
+{% endblock %}

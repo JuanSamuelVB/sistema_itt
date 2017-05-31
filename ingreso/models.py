@@ -1,14 +1,13 @@
 from django.db import models
 
-class Visitante(models.Model):
-    apellidos = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    descripcion = models.TextField()
+class usuarios(models.Model):
+	nocontrol = models.CharField(max_length=8,null=True)
+	nombre = models.CharField(max_length=30,null=True)
+	apellidop = models.CharField(max_length=30,null=True)
+	apellidom = models.CharField(max_length=30,null=True)
 
-class Acceso(models.Model):
-    profesor = models.ForeignKey('sistema.Profesor', 
-                                 on_delete=models.CASCADE)
-    alumno = models.ForeignKey('sistema.Alumno', 
-                                 on_delete=models.CASCADE)
-    visitante = models.ForeignKey('ingreso.Visitante', 
-                                 on_delete=models.CASCADE)
+class visitante(models.Model):
+	nombre = models.CharField(max_length=30)
+	apellidop = models.CharField(max_length=30)
+	apellidom = models.CharField(max_length=30)
+	detalles = models.CharField(max_length=50)

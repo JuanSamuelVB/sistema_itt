@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Alumnos{% endblock %}
+{% block content %}
+<h1>Alumnos</h1>
+
+<div  class="container log">
+  <Form METHOD = "POST">
+  {% csrf_token %}
+  <p>Num. control:  {{ usuario.nocontrol }}</p>
+  <p>Nombre :  {{ usuario.nombre }}</p>
+  <p>Apellido Paterno :  {{ usuario.apellidop }}</p>
+  <p>Apellido Materno :  {{ usuario.apellidom }}</p>
+    
+  <p> </p>
+  <input type="Submit" name="ok" value="OK">
+  </form>
+</div>
+{% endblock %}

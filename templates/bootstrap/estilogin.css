@@ -1,0 +1,33 @@
+body{
+  100%
+}
+.log{
+  margin:0 auto;
+  border:2px solid #fafafa;
+  padding:2%;
+  background:white;
+  box-shadow: 0 0 2px 2px #F2F2F2;
+}
+.int-text{
+padding-top:1%;
+line-height: 28px;
+font-size: 20px !important;
+font-family: 'SoberanaSans-Bold' !important;
+text-align: center;
+text-transform: uppercase;
+color: #616161;
+}
+.logo{
+  width:100%;
+  display:block;
+  background:white;
+  float:left;
+}
+.encabezado{
+  width:100%; 
+  border-bottom:4px solid #fafafa;
+  background:white;
+}
+body{
+  background:#D0F5A9;
+}
