@@ -19,5 +19,9 @@ class Titulacion(models.Model):
     fecha_inicio = models.DateField(default=timezone.now())
     fecha_fin = models.DateField(default=timezone.now())
 
+    revision_1 = models.DateField(default=timezone.now())
+    revision_2 = models.DateField(default=timezone.now())
+
+
     def __str__(self):
         return '%s : %s' % (self.proyecto, self.alumno)

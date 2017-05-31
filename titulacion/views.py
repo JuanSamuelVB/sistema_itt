@@ -11,7 +11,7 @@ class newTitulacion(CreateView):
     '''form_class = TitulacionForm'''
     model = Titulacion
     fields = '__all__'
-    success_url = reverse_lazy('sistema:profile')
+    success_url = reverse_lazy('titulacion:lista_titulacion')
 
     def form_valid(self, form):
         titu = form.save(commit=False)
@@ -25,6 +25,11 @@ class listaTitulacion(ListView):
     queryset = Titulacion.objects.all()
 
 class editaTitulacion(UpdateView):
+    model = Titulacion
+    fields='__all__'
+    template_name='titulacion/edit.html'
+
+class detalleTitulacion(DetailView):
     model = Titulacion
     fields='__all__'
     template_name='titulacion/edit.html'

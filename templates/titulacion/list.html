@@ -3,7 +3,7 @@
 {% block content %}
 <div  class="container log">
 
-{% if user.profesor %}
+{% if user.profesor or user.alumno %}
 <h1>Titulaciones</h1>
 <table class="table table-bordered table-hover">
     <thead>
@@ -15,6 +15,8 @@
         <th>Vocal</th>
         <th>Suplente</th>
         <th>Fecha de Inicio</th>
+        <th>Primera Revision</th>
+        <th>Segunda Revision</th>
         <th>Fecha Fin</th>
       </tr>
     </thead>
@@ -29,6 +31,8 @@
         <td>{{ titu.vocal }}</td>
         <td>{{ titu.suplente }}</td>
         <td>{{ titu.fecha_inicio }}</td>
+        <td>{{ titu.revision_1 }}</td>
+        <td>{{ titu.revision_2 }}</td>
         <td>{{ titu.fecha_fin }}</td>
         <td><a href="{% url 'titulacion:editar' titu.pk %}">Editar</a></td>
         <td><a href="{% url 'titulacion:eliminar' titu.pk %}">Eliminar</a></td>
